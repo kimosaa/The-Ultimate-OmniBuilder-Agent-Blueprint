@@ -1,0 +1,95 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omnibuilder"
+version = "0.1.0"
+description = "Autonomous developer, researcher, and executor agent for end-to-end project management"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "kimosaa", email = "latif86@hotmail.de"}
+]
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "openai>=1.0.0",
+    "anthropic>=0.18.0",
+    "httpx>=0.25.0",
+    "aiohttp>=3.9.0",
+    "pydantic>=2.0.0",
+    "rich>=13.0.0",
+    "typer>=0.9.0",
+    "python-dotenv>=1.0.0",
+    "gitpython>=3.1.0",
+    "watchdog>=3.0.0",
+    "chromadb>=0.4.0",
+    "tiktoken>=0.5.0",
+    "jinja2>=3.1.0",
+    "pyyaml>=6.0.0",
+    "toml>=0.10.0",
+    "psutil>=5.9.0",
+    "aiofiles>=23.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+]
+local-llm = [
+    "ollama>=0.1.0",
+]
+cloud = [
+    "boto3>=1.28.0",
+    "docker>=6.0.0",
+    "kubernetes>=27.0.0",
+]
+
+[project.scripts]
+omnibuilder = "omnibuilder.cli:main"
+ob = "omnibuilder.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/kimosaa/The-Ultimate-OmniBuilder-Agent-Blueprint"
+Repository = "https://github.com/kimosaa/The-Ultimate-OmniBuilder-Agent-Blueprint"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ['py310', 'py311', 'py312']
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "-v --cov=omnibuilder --cov-report=term-missing"
